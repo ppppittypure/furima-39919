@@ -1,10 +1,13 @@
 class PurchasesController < ApplicationController
-    before_action :authenticate_user!, except: :index
+    before_action :authenticate_user!
     before_action :set_public_key, only: [:index, :create]
     def index
         @purchase_address = PurchaseAddress.new
         @item = Item.find(params[:item_id])
-        
+        if @item.purchase.present? || current_user.id == @item.user_id
+            redirect_to root_path
+        end
+
     end
 
 
