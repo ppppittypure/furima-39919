@@ -1,10 +1,12 @@
 class PurchaseAddress
     include ActiveModel::Model
     attr_accessor :item_id, :post_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number, :purchase, :token, :user_id
-    validates :item_id, :prefecture_id, :municipalities, :street_address, :token, :user_id, presence: true
-    validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
-
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
+    with_options presence: true do
+      validates :item_id, :prefecture_id, :municipalities, :street_address, :token, :user_id,:telephone_number
+    end
     validates :post_code, presence: true, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
+    validates :prefecture_id,exclusion:{ in:[id: 0, name: '---'] }
   def save
   # 保存し、変数purchaseに代入する
     purchase = Purchase.create(user_id: user_id,item_id: item_id)

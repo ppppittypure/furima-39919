@@ -1,10 +1,11 @@
 class PurchasesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_public_key, only: [:index, :create]
+    before_action :set_public_key,:set_item, only: [:index, :create]
+    
     def index
         @purchase_address = PurchaseAddress.new
-        @item = Item.find(params[:item_id])
-        if @item.purchase.present? || current_user.id == @item.user_id
+        #@item = Item.find(params[:item_id])
+        if @item.purchase != nil || current_user.id == @item.user_id
             redirect_to root_path
         end
 
@@ -13,7 +14,7 @@ class PurchasesController < ApplicationController
 
     def create
         @purchase_address = PurchaseAddress.new(purchase_params)
-        @item = Item.find(params[:item_id])
+        #@item = Item.find(params[:item_id])
         if @purchase_address.valid?
             pay_item
            
@@ -42,6 +43,10 @@ end
 
     def set_public_key
         gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    end
+
+    def set_item
+        @item = Item.find(params[:item_id])
     end
 
     #def address_params
