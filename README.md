@@ -1,7 +1,7 @@
 # テーブル設計
 
-## users テーブル
 
+## users テーブル
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
 | nickname           | string | null: false |
@@ -49,16 +49,15 @@
 | item   | references | null: false, foreign_key: true |
 
 
-
-
 ### Association
 - belongs_to :user
 - belongs_to :item
 - has_one :address
 
+
 ## addresses テーブル
 
-| Column  | Type       | Options                        |
+| Column  | Type       | Options                       |
 | ------- | ---------- | ------------------------------ |
 | post_code   | string | null: false |
 | prefecture_id   | integer | null: false  |
@@ -72,3 +71,4 @@
 ### Association
 
 - belongs_to :purchase
+
