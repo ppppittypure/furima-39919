@@ -93,3 +93,4 @@ gem "pry-rails"
 gem "payjp"
 gem "faker"
 gem "gon"
+gem "aws-sdk-s3", require: false
