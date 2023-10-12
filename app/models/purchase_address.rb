@@ -3,7 +3,9 @@ class PurchaseAddress
     attr_accessor :item_id, :post_code, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number, :purchase, :token, :user_id
     #validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
     with_options presence: true do
-      validates :item_id, :prefecture_id, :municipalities, :street_address, :token, :user_id,:telephone_number,:post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" },:telephone_number, format: { with: /\A\d{10,11}\z/ }
+      validates :item_id, :prefecture_id, :municipalities, :street_address, :token, :user_id,:telephone_number
+      validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
+      validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
     end
     
     validates :prefecture_id,exclusion:{ in:[id: 0, name: '---'] }
