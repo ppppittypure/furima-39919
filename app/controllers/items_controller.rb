@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order(created_at: :desc)
+
   end
 
   def new
@@ -18,12 +19,16 @@ class ItemsController < ApplicationController
     else
       render 'new', status: :unprocessable_entity
     end
+
   end
 
   def show
   end
 
   def edit
+    if @item.purchase != nil || current_user.id == @item.user_id
+    redirect_to root_path
+  end
   end
 
   def update
