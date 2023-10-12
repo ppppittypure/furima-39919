@@ -9,7 +9,6 @@ FactoryBot.define do
     token { "tok_abcdefghijk00000000000000000" }
 
 
-    association :user_id
-    association :item_id
+   
   end
 end
