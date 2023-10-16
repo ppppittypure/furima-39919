@@ -22,7 +22,7 @@
         <%= @item.shipping_charge.charge %>
       </span>
     </div>
-    <% if user_signed_in? && @item.purchase == nil %>                                  
+    <% if user_signed_in? && @item.purchase  %>                                  
       <% if current_user.id == @item.user_id %>                                        
           <%= link_to "商品の編集", edit_item_path(@item.id), method: :edit, class: "item-red-btn" %>
             <p class='or-text'>or</p>
